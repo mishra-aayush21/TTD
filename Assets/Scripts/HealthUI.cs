@@ -4,25 +4,20 @@ using UnityEngine.UI;
 public class HealthUI : MonoBehaviour
 {
     public Health playerHealth; // Reference to the player's Health script
-    public Image healthBarFill; // Reference to the HealthBarFill Image
-
-    private float maxWidth; // Store the maximum width of the health bar
+    public Slider healthSlider; // Reference to the Slider UI
 
     void Start()
     {
-        // Get the initial width of the health bar fill
-        maxWidth = healthBarFill.rectTransform.sizeDelta.x;
+        // Initialize the slider's max value
+        healthSlider.maxValue = playerHealth.maxHealth;
+        healthSlider.value = playerHealth.currentHealth;
         // Listen for health changes
         playerHealth.OnHealthChanged.AddListener(UpdateHealthUI);
-        // Initialize the health bar
-        UpdateHealthUI(playerHealth.currentHealth);
     }
 
     void UpdateHealthUI(int currentHealth)
     {
-        // Calculate the new width based on current health
-        float newWidth = (float)currentHealth / playerHealth.maxHealth * maxWidth;
-        // Update the health bar width
-        healthBarFill.rectTransform.sizeDelta = new Vector2(newWidth, healthBarFill.rectTransform.sizeDelta.y);
+        // Update the slider value
+        healthSlider.value = currentHealth;
     }
 }

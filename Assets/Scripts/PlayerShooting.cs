@@ -29,7 +29,7 @@ public class PlayerShooting : MonoBehaviour
             if (targetHealth != null)
             {
                 targetHealth.TakeDamage(damagePerShot);
-                Debug.Log("HIT!!");
+                
             }
         }
     }
